@@ -119,15 +119,6 @@ add_action( 'wp_enqueue_scripts', 'areisle_portfolio_scripts' );
 
 
 
-
-
-function save_work_and_create_work_term( $post ) {
-    $post = get_post($postid);
-    wp_insert_term( $post->post_name, 'work');
-}
-add_action( 'save_post', 'save_work_and_create_work_term' );
-
-
 /**
  * Implement the Custom Header feature.
  */
