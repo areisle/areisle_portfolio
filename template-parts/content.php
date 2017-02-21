@@ -33,14 +33,13 @@
 				wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'areisle_portfolio' ), array( 'span' => array( 'class' => array() ) ) ),
 				the_title( '<span class="screen-reader-text">"', '"</span>', false )
 			) );
-
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'areisle_portfolio' ),
 				'after'  => '</div>',
 			) );
 		?>
 	</div><!-- .entry-content -->
-
+    <?php the_post_thumbnail(); ?>
 	<footer class="entry-footer">
 		<?php areisle_portfolio_entry_footer(); ?>
 	</footer><!-- .entry-footer -->

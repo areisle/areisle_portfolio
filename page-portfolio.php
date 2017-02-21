@@ -19,7 +19,7 @@ get_header(); ?>
 
         <?php //conditions
         $args = array( 
-            'post_type' => array('work','snippet'),
+            'post_type' => array('work'),
             'posts_per_page' => -1,
             'orderby' => 'title',
             'order' => 'ASC'
@@ -28,18 +28,26 @@ get_header(); ?>
         $work = new WP_Query( $args );
 
         //Loop starts
-        if ( $work->have_posts() ) { 
+        if ( $work->have_posts() ) {
+            ?>
+            <ul class="works-list">
+            <?php
             while ( $work->have_posts() ) {
                 $work->the_post();
                 ?>
-                <p>
+                <li class="work">
+                <a href="<?php the_permalink() ?>">
                 <?php
                 the_title();
                 ?>
-                </p>
+                </a>
+                </li>
                 <?php
             }
             wp_reset_postdata(); 
+            ?>
+            </ul>
+            <?php
         } ?>
 
 		</main><!-- #main -->
