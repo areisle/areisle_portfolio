@@ -51,18 +51,78 @@ get_header(); ?>
                 <?php the_content(); ?>
             </section>
             
-            <!-- process/ snippets -->
-                <?php
-                if (function_exists ('get_field')){
-                    if(get_field('process/_snippets')){ ?>
-                        <section id="process" class="process">
-                        <?php
-                        the_field('process/_snippets');	
+            <?php
+
+            if( have_rows('gallery_large') ): ?>
+               <section class="gallery">
+                <div class="outer-wrapper large">
+                <div class="inner-wrapper">
+                    <?php
+                    $count = 0;
+                    while ( have_rows('gallery_large') ) : the_row();
+                        $count++;
+                        $img = get_sub_field('gallery_image_large');
                         ?>
-                        </section>
+                        <img class="inner" src="<?php echo $img['url']; ?>" alt="<?php echo $img['alt']; ?>">
                         <?php
-                    }
-                }?>
+                    endwhile;
+                    ?>
+                </div>
+                <img class="border" src="<?php echo get_template_directory_uri().'/images/laptop.svg'; ?>" alt="">
+                </div>
+                <?php
+                if( have_rows('gallery_small') ): ?>
+                <div class="outer-wrapper small">
+                <div class="inner-wrapper">
+                    <?php
+                    while ( have_rows('gallery_small') ) : the_row();
+                        $img = get_sub_field('gallery_image_small');
+                        ?>
+                        <img class="inner" src="<?php echo $img['url']; ?>" alt="<?php echo $img['alt']; ?>">
+                        <?php
+                    endwhile;
+                    ?>
+                </div>
+                <img class="border" src="<?php echo get_template_directory_uri().'/images/phone.svg'; ?>" alt="">
+                </div>
+                <?php
+                endif;
+                ?>
+                </section>
+                <?php
+                if ($count > 1):
+                ?>
+                <nav class="gallery-nav">
+                    <button class="btn btn-previous"></button>
+                    
+                    <ul class="inner-nav">
+                        <?php
+                        for ($x = 0; $x < $count; $x++):
+                        ?>
+                        <li><button class="<?php ($x === $count - 1)?"active":""; ?>"></button></li>
+                        <?php
+                        endfor;
+                        ?>
+                    </ul>
+                    <button class="btn btn-next"></button>
+                </nav> 
+                <?php
+                endif;
+            endif;
+
+            ?>
+            <!-- process/ snippets -->
+            <?php
+            if (function_exists ('get_field')){
+                if(get_field('process/_snippets')){ ?>
+                    <section id="process" class="process">
+                    <?php
+                    the_field('process/_snippets');	
+                    ?>
+                    </section>
+                    <?php
+                }
+            }?>
             
             <!-- critique -->
             <section id="critique" class="critique">

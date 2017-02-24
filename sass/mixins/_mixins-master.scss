@@ -22,3 +22,19 @@
 @mixin clearfix-after() {
 	clear: both;
 }
+
+//vars: flex-direction, justify-content, align-content, flex-wrap=wrap
+@mixin flex($dir, $justify, $align-content, $wrap) {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: $justify;
+    justify-content: $justify;
+    -webkit-align-content: $align-content;
+    align-content: $align-content;
+    -webkit-align-items: $align-content;
+    align-items: $align-content;
+    -webkit-flex-direction: $dir;
+    flex-direction: $dir;
+    -webkit-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+}

@@ -1,8 +1,12 @@
-
+$off-white: #E5E5E5;
+$white: #ffffff;
+$mustard: #CCA43B;
+$navy: #242F40;
+$darkgrey: #363636;
 .snippet {
     width: 100%;
     padding: 10px;
-    background-color: aliceblue;
+    background-color: $navy;
     @media only screen and (min-width: 400px) {
         padding: 40px;
     }
@@ -13,8 +17,146 @@
 .process {
     display: flex;
     flex-wrap: wrap;
+    h2 {
+        color: $off-white;
+    }
+    p {
+        color: $off-white;
+    }
 }
 main {
     padding-left: 5px;
     padding-right: 5px;
+    margin-bottom: 60px;
+}
+
+.critique {
+    background-color: $off-white;
+    color: $navy;
+}
+
+* {
+    box-sizing:border-box;
+}
+.inner.left {
+    left: -100%;
+}
+.inner.centre {
+    left: 0%;
+}
+.inner.right {
+    left: 100%;
+}
+.inner-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: -webkit-flex;
+    display: flex;
+    li {
+        padding: 20px;
+        margin: 10px;
+        max-width: 150px;
+        border: 3px solid red;
+    }
+    li.active {
+        border: 3px solid blue;
+    }
+}
+.gallery {
+    padding: 20px 5px;
+    background-color: #363636;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border: 3px solid $off-white;
+    -webkit-align-items: center;
+    align-items: center;
+    position: relative;
+}
+
+.gallery-nav {
+    display: none;
+    @media only screen and (min-width: 600px) {
+        @include flex(row, center, center, nowrap);
+//        display: -webkit-flex;
+//        display: flex;
+//        -webkit-justify-content: center;
+//        justify-content: center;
+//        -webkit-align-items: center;
+//        align-items: center;
+    }
+}
+.outer-wrapper {
+    position: relative;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.outer-wrapper.small {
+    width: 20vw;
+    height: 10vw;
+    min-width: 300px;
+    min-height: 150px;
+    margin-top: 20px;
+    z-index: 2;
+    .inner-wrapper {
+        height: calc(7 / 8 * 100%);
+        width: 70%;
+    }
+    .inner {
+        height: 100%;
+    }
+}
+.outer-wrapper.large {
+    width: 90vw;
+    height: 57.6vw;
+    z-index: 1;
+    .inner-wrapper {
+        width: 88%;
+        height: 82%;
+    }
+    .inner {
+        height: 90%;
+    }
+}
+.inner-wrapper {
+    position: relative;
+    overflow: hidden;
+
+}
+.inner {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.btn {
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-color: transparent;
+    border: none;
+}
+.btn-previous {
+    background-image: url(images/chevron-left.svg);
+}
+.btn-next {
+    background-image: url(images/chevron-right.svg);
+}
+.border {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    pointer-events: none;
 }

@@ -1,3 +1,7 @@
 .sass-cache/
 *.css.map
 *.css
+style.css
+.DS_Store
+images/
+js/hammer*
