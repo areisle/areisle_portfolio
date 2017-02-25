@@ -120,3 +120,10 @@ function areisle_portfolio_category_transient_flusher() {
 }
 add_action( 'edit_category', 'areisle_portfolio_category_transient_flusher' );
 add_action( 'save_post',     'areisle_portfolio_category_transient_flusher' );
+
+function get_nextpost_link( $format = '%link', $link = '%title', $in_same_term = false, $excluded_terms = '', $taxonomy = 'category' ) {
+    return get_adjacent_post_link( $format, $link, $in_same_term, $excluded_terms, false, $taxonomy );
+}
+function get_previouspost_link( $format = '%link', $link = '%title', $in_same_term = false, $excluded_terms = '', $taxonomy = 'category' ) {
+    return get_adjacent_post_link( $format, $link, $in_same_term, $excluded_terms, true, $taxonomy );
+}

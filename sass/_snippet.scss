@@ -1,8 +1,4 @@
-$off-white: #E5E5E5;
-$white: #ffffff;
-$mustard: #CCA43B;
-$navy: #242F40;
-$darkgrey: #363636;
+$gallery-swap: 1200px;
 .snippet {
     width: 100%;
     padding: 10px;
@@ -15,8 +11,7 @@ $darkgrey: #363636;
     }
 }
 .process {
-    display: flex;
-    flex-wrap: wrap;
+    @include flex(row, flex-start, stretch, wrap);
     h2 {
         color: $off-white;
     }
@@ -51,8 +46,8 @@ main {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: -webkit-flex;
-    display: flex;
+    @include flex-d();
+    
     li {
         padding: 20px;
         margin: 10px;
@@ -66,37 +61,20 @@ main {
 .gallery {
     padding: 20px 5px;
     background-color: #363636;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    @include flex(row, space-around, center, wrap);
     border: 3px solid $off-white;
-    -webkit-align-items: center;
-    align-items: center;
     position: relative;
 }
 
 .gallery-nav {
     display: none;
     @media only screen and (min-width: 600px) {
-        @include flex(row, center, center, nowrap);
-//        display: -webkit-flex;
-//        display: flex;
-//        -webkit-justify-content: center;
-//        justify-content: center;
-//        -webkit-align-items: center;
-//        align-items: center;
+        @include centre();
     }
 }
 .outer-wrapper {
     position: relative;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
+    @include centre();
 }
 .outer-wrapper.small {
     width: 20vw;
@@ -112,8 +90,13 @@ main {
     .inner {
         height: 100%;
     }
+    @media only screen and (min-width: $gallery-swap) {
+        align-self: flex-end;
+    }
 }
 .outer-wrapper.large {
+    max-width: 800px;
+    max-height: 512px;
     width: 90vw;
     height: 57.6vw;
     z-index: 1;
@@ -153,8 +136,7 @@ main {
 }
 .border {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    @include full-size();
     top: 0px;
     left: 0px;
     z-index: 10;

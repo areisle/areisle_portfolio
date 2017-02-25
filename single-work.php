@@ -54,9 +54,9 @@ get_header(); ?>
             <?php
 
             if( have_rows('gallery_large') ): ?>
-               <section class="gallery">
+               <figure class="gallery">
                 <div class="outer-wrapper large">
-                <div class="inner-wrapper">
+                    <div class="inner-wrapper">
                     <?php
                     $count = 0;
                     while ( have_rows('gallery_large') ) : the_row();
@@ -68,12 +68,13 @@ get_header(); ?>
                     endwhile;
                     ?>
                 </div>
-                <img class="border" src="<?php echo get_template_directory_uri().'/images/laptop.svg'; ?>" alt="">
+                    <img class="border" src="<?php echo get_template_directory_uri().'/images/laptop.svg'; ?>" alt="">
                 </div>
+                
                 <?php
                 if( have_rows('gallery_small') ): ?>
                 <div class="outer-wrapper small">
-                <div class="inner-wrapper">
+                    <div class="inner-wrapper">
                     <?php
                     while ( have_rows('gallery_small') ) : the_row();
                         $img = get_sub_field('gallery_image_small');
@@ -83,12 +84,12 @@ get_header(); ?>
                     endwhile;
                     ?>
                 </div>
-                <img class="border" src="<?php echo get_template_directory_uri().'/images/phone.svg'; ?>" alt="">
+                    <img class="border" src="<?php echo get_template_directory_uri().'/images/phone.svg'; ?>" alt="">
                 </div>
                 <?php
                 endif;
                 ?>
-                </section>
+                </figure>
                 <?php
                 if ($count > 1):
                 ?>
@@ -99,7 +100,7 @@ get_header(); ?>
                         <?php
                         for ($x = 0; $x < $count; $x++):
                         ?>
-                        <li><button class="<?php ($x === $count - 1)?"active":""; ?>"></button></li>
+                        <li <?php echo ($x === $count - 1)?'class="active"':''; ?> ><button></button></li>
                         <?php
                         endfor;
                         ?>
@@ -135,8 +136,10 @@ get_header(); ?>
             </section>
             
             
-            <?php previous_post_link(); ?>
-            <?php next_post_link(); ?>
+            <nav class="post-navigation">
+                <?php echo get_previouspost_link(); ?>
+                <?php echo get_nextpost_link(); ?>
+            </nav>
             <?php
 		endwhile; // End of the loop.
 		?>

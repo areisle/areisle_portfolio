@@ -1,4 +1,4 @@
-/*global jQuery, Hammer */
+/*global jQuery, Hammer, console */
 jQuery(document).ready(function ($) {
     "use strict";
     var current_img = $('.large .inner').length - 1,
@@ -52,9 +52,9 @@ jQuery(document).ready(function ($) {
     
     
     $inner_nav.on('click mouseenter', function () {
-        $inner_nav.removeClass('active');
-        $(this).addClass('active');
-        var next_img = $(this).index('li');
+        //$inner_nav.removeClass('active');
+        jQuery(this).addClass('active');
+        var next_img = $(this).index('.inner-nav li');
         if (next_img > current_img) {
             swap_image(current_img, next_img, $mobile_img_list, 'left', 50);
             current_img = swap_image(current_img, next_img, $img_list, 'left', 0);

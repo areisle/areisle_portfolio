@@ -23,18 +23,61 @@
 	clear: both;
 }
 
+//https://css-tricks.com/snippets/sass/mixin-prefix-properties/
+/// Mixin to prefix a property
+/// @author Hugo Giraudel
+/// @param {String} $property - Property name
+/// @param {*} $value - Property value
+/// @param {List} $prefixes (()) - List of prefixes to print
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+ 
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+@mixin prefix-v($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+      #{$property}: #{'-' + $prefix + '-' + $value};
+  }
+ 
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
 //vars: flex-direction, justify-content, align-content, flex-wrap=wrap
 @mixin flex($dir, $justify, $align-content, $wrap) {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: $justify;
-    justify-content: $justify;
-    -webkit-align-content: $align-content;
-    align-content: $align-content;
-    -webkit-align-items: $align-content;
-    align-items: $align-content;
-    -webkit-flex-direction: $dir;
-    flex-direction: $dir;
-    -webkit-flex-wrap: $wrap;
-    flex-wrap: $wrap;
+    @include prefix-v(display, flex, webkit);
+    @include prefix(justify-content, $justify, webkit);
+    @include prefix(align-content, $align-content, webkit);
+    @include prefix(align-items, $align-content, webkit);
+    @include prefix(flex-direction, $dir, webkit);
+    @include prefix(flex-wrap, $wrap, webkit);
 }
+
+@mixin flex-d() {
+    @include prefix-v(display, flex, webkit);
+}
+
+@mixin centre() {
+    @include flex(row, center, center, nowrap);
+}
+
+@mixin testing($colour:red){
+    @if ($testing) {
+        border: 3px solid $colour;
+    }
+}
+@mixin full-size() {
+    width: 100%;
+    height: 100%;
+}
+    
+    
+    
+    
+    
+    
+    
