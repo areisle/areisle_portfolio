@@ -35,11 +35,13 @@ get_header(); ?>
             while ( $work->have_posts() ) {
                 $work->the_post();
                 ?>
-                <li class="work">
-                <a href="<?php the_permalink() ?>">
+                <li class="work" style="background-image: url('<?php echo get_the_post_thumbnail_url(); ?>')">
+                <a href="<?php the_permalink() ?>" >
+                <h2>
                 <?php
                 the_title();
                 ?>
+                </h2>
                 </a>
                 </li>
                 <?php

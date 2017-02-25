@@ -2,7 +2,6 @@ $gallery-swap: 1200px;
 .snippet {
     width: 100%;
     padding: 10px;
-    background-color: $navy;
     @media only screen and (min-width: 400px) {
         padding: 40px;
     }
@@ -12,6 +11,7 @@ $gallery-swap: 1200px;
 }
 .process {
     @include flex(row, flex-start, stretch, wrap);
+    background-color: $navy;
     h2 {
         color: $off-white;
     }
@@ -20,11 +20,17 @@ $gallery-swap: 1200px;
     }
 }
 main {
-    padding-left: 5px;
-    padding-right: 5px;
+//    padding-left: 5px;
+//    padding-right: 5px;
     margin-bottom: 60px;
 }
-
+section {
+    padding: 5px;
+}
+.overview {
+    max-width: 600px;
+    margin: auto;
+}
 .critique {
     background-color: $off-white;
     color: $navy;
@@ -49,27 +55,53 @@ main {
     @include flex-d();
     
     li {
-        padding: 20px;
         margin: 10px;
-        max-width: 150px;
-        border: 3px solid red;
+        width: 40px;
+        height: 40px;
+        @include centre();
     }
-    li.active {
-        border: 3px solid blue;
+    button {
+        background: transparent;
+        border: none;
+        width: 90%;
+        height: 90%;
+        
+        border-radius: 0;
+        outline: none;
+        border: 3px solid $off-white;
+        transition: 0.3s;
     }
+    li.active button {
+        border: 3px solid $mustard;
+        @include full-size();
+    }
+}
+.hide {
+    display: none !important;
 }
 .gallery {
     padding: 20px 5px;
     background-color: #363636;
     @include flex(row, space-around, center, wrap);
-    border: 3px solid $off-white;
     position: relative;
+    margin: 0;
+    figcaption {
+        width: 100%;
+        color: $off-white;
+        padding: 5px;
+        order: 3;
+        @media only screen and (min-width: $gallery-swap) {
+            order: 2;
+            width: 20vw;
+        }
+    }
 }
 
 .gallery-nav {
     display: none;
     @media only screen and (min-width: 600px) {
         @include centre();
+        order: 4;
     }
 }
 .outer-wrapper {
@@ -77,6 +109,7 @@ main {
     @include centre();
 }
 .outer-wrapper.small {
+    order: 2;
     width: 20vw;
     height: 10vw;
     min-width: 300px;
@@ -95,6 +128,7 @@ main {
     }
 }
 .outer-wrapper.large {
+    order: 1;
     max-width: 800px;
     max-height: 512px;
     width: 90vw;
@@ -141,4 +175,34 @@ main {
     left: 0px;
     z-index: 10;
     pointer-events: none;
+}
+
+.works-list {
+   list-style: none;
+    padding: 0;
+    margin: 0;
+    .work {
+        width: 100%;
+        height: 66.7vw;
+        max-width: 450px;
+        max-height: 300px;
+        background-size: cover;
+    }
+    .work-1 {}
+    .work-2 {}
+    .work-3 {}
+    .work-4 {}
+    .work-5 {}
+    a {
+        @include full-size();
+        @include centre();
+        padding: 20%;
+        text-decoration: none;
+    }
+    h2 {
+        background: rgba(white, 0.7);
+        @include full-size();
+        @include centre();
+        text-align: center;
+    }
 }

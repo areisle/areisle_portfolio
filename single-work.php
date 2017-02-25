@@ -15,7 +15,7 @@ get_header(); ?>
 		<?php
 		while ( have_posts() ) : the_post();
             ?>
-            <nav class="post-navigation">
+            <nav class="post-navigation hide">
                 <ul>
                     <li><a href="#overview">Overview</a></li>
                     <li><a href="#process">Process/ Snippets</a></li>
@@ -70,7 +70,36 @@ get_header(); ?>
                 </div>
                     <img class="border" src="<?php echo get_template_directory_uri().'/images/laptop.svg'; ?>" alt="">
                 </div>
-                
+                <figcaption>
+                <?php
+                while ( have_rows('gallery_large') ) : the_row();
+                        $img = get_sub_field('gallery_image_large');
+                        ?>
+                        <h3><?php echo $img['title'];?></h3>
+                        <p><?php echo $img['caption'];?></p>
+                        <?php
+                    endwhile;
+                   ?></figcaption>
+                <?php
+                if ($count > 1):
+                ?>
+                <nav class="gallery-nav">
+                    <button class="btn btn-previous"></button>
+                    
+                    <ul class="inner-nav">
+                        <?php
+                        for ($x = 0; $x < $count; $x++):
+                        ?>
+                        <li <?php echo ($x === $count - 1)?'class="active"':''; ?> ><button></button></li>
+                        <?php
+                        endfor;
+                        ?>
+                    </ul>
+                    <button class="btn btn-next"></button>
+                </nav> 
+                <?php
+                endif;
+                ?>
                 <?php
                 if( have_rows('gallery_small') ): ?>
                 <div class="outer-wrapper small">
@@ -91,24 +120,6 @@ get_header(); ?>
                 ?>
                 </figure>
                 <?php
-                if ($count > 1):
-                ?>
-                <nav class="gallery-nav">
-                    <button class="btn btn-previous"></button>
-                    
-                    <ul class="inner-nav">
-                        <?php
-                        for ($x = 0; $x < $count; $x++):
-                        ?>
-                        <li <?php echo ($x === $count - 1)?'class="active"':''; ?> ><button></button></li>
-                        <?php
-                        endfor;
-                        ?>
-                    </ul>
-                    <button class="btn btn-next"></button>
-                </nav> 
-                <?php
-                endif;
             endif;
 
             ?>

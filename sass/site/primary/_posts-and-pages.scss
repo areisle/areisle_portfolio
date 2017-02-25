@@ -26,3 +26,20 @@
 	clear: both;
 	margin: 0 0 1.5em;
 }
+.site-header > div {
+    width: 100%;
+    z-index: 1000;
+    bottom: 0px;
+    position: fixed;
+    @include testing(green);
+    @media only screen and (min-width: $size__nav-switch) {
+        //display: flex;
+        bottom: auto;
+        justify-content: space-between;
+    }
+    .logo {
+    }
+}
+.site-content {
+    margin-top: 60px;
+}

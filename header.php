@@ -22,12 +22,13 @@
 <body <?php body_class(); ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'areisle_portfolio' ); ?></a>
-
 	<header id="masthead" class="site-header" role="banner">
-        <a href="<?php echo site_url(); ?>" class="logo">Logo/ Home</a>
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<?php wp_nav_menu( array( 'theme_location' => 'menu-1', 'menu_id' => 'primary-menu' ) ); ?>
-		</nav><!-- #site-navigation -->
+       <div>
+            <div class="logo"></div>
+            <nav id="site-navigation" class="main-navigation" role="navigation">
+                <?php wp_nav_menu( array( 'theme_location' => 'menu-1', 'menu_id' => 'primary-menu' ) ); ?>
+            </nav><!-- #site-navigation -->
+        </div>
 	</header><!-- #masthead -->
-
+    
 	<div id="content" class="site-content">

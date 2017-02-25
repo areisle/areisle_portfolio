@@ -47,7 +47,11 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%; }
+  -ms-text-size-adjust: 100%;
+  box-sizing: border-box; }
+
+* {
+  box-sizing: inherit; }
 
 body {
   margin: 0; }
@@ -233,12 +237,14 @@ textarea {
 h1, h2, h3, h4, h5, h6 {
   clear: both; }
 
-h1, h2 {
+h1, h2, h3 {
   font-family: futura-pt, sans-serif;
   font-weight: 100; }
 
 p {
-  margin-bottom: 1.5em; }
+  margin-bottom: 1.5em;
+  font-family: futura-pt, sans-serif;
+  line-height: 2em; }
 
 dfn, cite, em, i {
   font-style: italic; }
@@ -431,55 +437,53 @@ a {
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
-.main-navigation {
-  position: fixed;
+.main-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  -webkit-align-content: center;
+  align-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  background-color: rgba(255, 255, 255, 0.6); }
+.main-navigation li {
+  width: calc(100% / 3);
+  max-width: 150px;
+  min-width: 100px;
+  min-height: 60px; }
+.main-navigation a {
+  text-decoration: none;
+  font-family: futura-pt-condensed, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
   width: 100%;
-  bottom: 0px;
-  z-index: 1000; }
-  .main-navigation ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
-    -webkit-align-content: center;
-    align-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    background-color: white;
-    width: 100%; }
-  .main-navigation li {
-    width: calc(100% / 3);
-    max-width: 200px;
-    min-width: 100px;
-    min-height: 60px;
-    border: 3px solid orange; }
-  .main-navigation a {
-    text-decoration: none;
-    font-family: futura-pt-condensed, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2rem;
-    width: 100%;
-    height: 100%;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-content: center;
-    align-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap; }
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-content: center;
+  align-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap; }
+.main-navigation .current_page_item > a,
+.main-navigation .current-menu-item > a,
+.main-navigation .current_page_ancestor > a,
+.main-navigation .current-menu-ancestor > a {
+  border-bottom: 3px solid #CCA43B; }
 
 .site-main .comment-navigation, .site-main
 .posts-navigation, .site-main
@@ -616,6 +620,19 @@ a {
   clear: both;
   margin: 0 0 1.5em; }
 
+.site-header > div {
+  width: 100%;
+  z-index: 1000;
+  bottom: 0px;
+  position: fixed; }
+  @media only screen and (min-width: 1000px) {
+    .site-header > div {
+      bottom: auto;
+      justify-content: space-between; } }
+
+.site-content {
+  margin-top: 60px; }
+
 /*--------------------------------------------------------------
 ## Comments
 --------------------------------------------------------------*/
@@ -707,8 +724,7 @@ object {
 --------------------------------------------------------------*/
 .snippet {
   width: 100%;
-  padding: 10px;
-  background-color: #242F40; }
+  padding: 10px; }
   @media only screen and (min-width: 400px) {
     .snippet {
       padding: 40px; } }
@@ -728,16 +744,22 @@ object {
   -webkit-flex-direction: row;
   flex-direction: row;
   -webkit-flex-wrap: wrap;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  background-color: #242F40; }
   .process h2 {
     color: #E5E5E5; }
   .process p {
     color: #E5E5E5; }
 
 main {
-  padding-left: 5px;
-  padding-right: 5px;
   margin-bottom: 60px; }
+
+section {
+  padding: 5px; }
+
+.overview {
+  max-width: 600px;
+  margin: auto; }
 
 .critique {
   background-color: #E5E5E5;
@@ -762,12 +784,37 @@ main {
   display: -webkit-flex;
   display: flex; }
   .inner-nav li {
-    padding: 20px;
     margin: 10px;
-    max-width: 150px;
-    border: 3px solid red; }
-  .inner-nav li.active {
-    border: 3px solid blue; }
+    width: 40px;
+    height: 40px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    align-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap; }
+  .inner-nav button {
+    background: transparent;
+    border: none;
+    width: 90%;
+    height: 90%;
+    border-radius: 0;
+    outline: none;
+    border: 3px solid #E5E5E5;
+    transition: 0.3s; }
+  .inner-nav li.active button {
+    border: 3px solid #CCA43B;
+    width: 100%;
+    height: 100%; }
+
+.hide {
+  display: none !important; }
 
 .gallery {
   padding: 20px 5px;
@@ -784,8 +831,17 @@ main {
   flex-direction: row;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
-  border: 3px solid #E5E5E5;
-  position: relative; }
+  position: relative;
+  margin: 0; }
+  .gallery figcaption {
+    width: 100%;
+    color: #E5E5E5;
+    padding: 5px;
+    order: 3; }
+    @media only screen and (min-width: 1200px) {
+      .gallery figcaption {
+        order: 2;
+        width: 20vw; } }
 
 .gallery-nav {
   display: none; }
@@ -802,7 +858,8 @@ main {
       -webkit-flex-direction: row;
       flex-direction: row;
       -webkit-flex-wrap: nowrap;
-      flex-wrap: nowrap; } }
+      flex-wrap: nowrap;
+      order: 4; } }
 
 .outer-wrapper {
   position: relative;
@@ -820,6 +877,7 @@ main {
   flex-wrap: nowrap; }
 
 .outer-wrapper.small {
+  order: 2;
   width: 20vw;
   height: 10vw;
   min-width: 300px;
@@ -836,6 +894,7 @@ main {
       align-self: flex-end; } }
 
 .outer-wrapper.large {
+  order: 1;
   max-width: 800px;
   max-height: 512px;
   width: 90vw;
@@ -879,5 +938,50 @@ main {
   left: 0px;
   z-index: 10;
   pointer-events: none; }
+
+.works-list {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+  .works-list .work {
+    width: 100%;
+    height: 66.7vw;
+    max-width: 450px;
+    max-height: 300px;
+    background-size: cover; }
+  .works-list a {
+    width: 100%;
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    align-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding: 20%;
+    text-decoration: none; }
+  .works-list h2 {
+    background: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    align-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
