@@ -7,7 +7,10 @@ jQuery(document).ready(function ($) {
         $window = $(window),
         $page = $('body, html'),
         $floating_box = $('#floating-box'),
-        buffer = 59;
+        buffer = 59,
+        borderWidth = 8,
+        isClick = false,
+        timer;
     
     function scrollToSection(sectionid) {
         $page.animate({
@@ -16,11 +19,17 @@ jQuery(document).ready(function ($) {
     }
     
     $nav_items.on('click', function (e) {
-        e.preventDefault();
         
+        e.preventDefault();
+        clearTimeout(timer);
+        isClick = true;
+        timer = setTimeout(function () {
+            isClick = false;
+        }, 500);
         var sectionid = $(this).attr('href');
         scrollToSection(sectionid);
-        //scrollSections();
+        
+        $floating_box.css('top', $(this).offset().top + $(this).height() / 2 - $floating_box.height() / 2 - $window.scrollTop() - borderWidth);
         
     });
     //get section top positions --- will have to do all of this on resize as well
@@ -28,8 +37,7 @@ jQuery(document).ready(function ($) {
     function scrollSections(changeclass) {
         var count = $sections.length,
             current_section,
-            $active = $('#inner-post-navigation a.active'),
-            borderWidth = 8;
+            $active = $('#inner-post-navigation a.active');
         if (count < 2) {
             return;
         } else {
@@ -56,7 +64,9 @@ jQuery(document).ready(function ($) {
                 $nav_items.removeClass('active');
                 $($nav_items[count - 1]).addClass('active');
             }
-            $floating_box.css('top', $('#inner-post-navigation a.active').offset().top + $('#inner-post-navigation a.active').height() / 2 - $floating_box.height() / 2 - $window.scrollTop() - borderWidth);
+            if (!isClick) {
+                $floating_box.css('top', $('#inner-post-navigation a.active').offset().top + $('#inner-post-navigation a.active').height() / 2 - $floating_box.height() / 2 - $window.scrollTop() - borderWidth);
+            }
         }
     }
     $window.on('scroll resize', function () {
