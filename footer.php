@@ -14,6 +14,10 @@
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
+	    <details>
+            <summary>Credits</summary>
+            <p>HTML5 and CSS3 Badges adapted from ones created by <a href="http://daphyre.deviantart.com/art/HTML5-Logos-and-Badges-380429526">daPhyre</a> under the Creative Commons Attribution 3.0 Unported license.</p>
+        </details>
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'areisle_portfolio' ) ); ?>"><?php //printf( esc_html__( 'Proudly powered by %s', 'areisle_portfolio' ), 'WordPress' ); ?></a>
 <!--			<span class="sep"> | </span>-->

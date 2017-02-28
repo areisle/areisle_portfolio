@@ -1,0 +1,81 @@
+.contact {
+    font-family: futura-regular;
+    background-color: $off-white;
+    width: 90%;
+    margin: 0 auto;
+    .code-social {
+        background-color: white;
+        @include flex(column, space-around, center, nowrap);
+    }
+    .code-social ul {
+        width: 100%;
+        @include clean-list();
+        @include flex(row, space-around, center, wrap);
+        @media only screen and (min-width: $size__1-2-column-switch) {
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+    }
+    .code-social li {
+        position: relative;
+        padding: 0 3em;;
+        margin-bottom: 5rem;
+        width: 50%;
+        @media only screen and (min-width: $size__1-2-column-switch) {
+            width: auto;
+        }
+    }
+    .icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    
+    .code-social span {
+        display: block;
+        position: absolute;
+        bottom: -3rem;
+        left: 0px;
+        text-align: center;
+        width: 100%;
+    }
+    @media only screen and (min-width: $size__1-2-column-switch) {
+        @include flex-d();
+        section {
+            min-height: calc(100vh - 60px);
+        }
+        .contact-form {
+            width: 70%;
+        }
+        .code-social {
+            width: 30%;
+        }
+    }
+}
+.contact-form {
+    padding: 20px;
+    @media only screen and (min-width: $size__nav-switch) {
+        padding: 50px;
+    }
+}
+.icon.linkedin {
+     background-image: url('images/In-Black-128px-TM.png');   
+}
+.icon.jsfiddle {
+    background-image: url('images/jsfiddle.svg'); 
+}
+.icon.github {
+    background-image: url('images/github.svg'); 
+}
+.icon.codepen {
+    background-image: url('images/codepen.svg'); 
+}
+.email {
+    display: block;
+    padding: 10px;
+    margin: 20px;
+}

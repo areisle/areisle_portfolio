@@ -37,9 +37,15 @@
         bottom: auto;
         justify-content: space-between;
     }
-    .logo {
-    }
 }
 .site-content {
-    margin-top: 60px;
+    min-height: calc(100vh - 60px);
+}
+.site-footer {
+    margin-bottom: 60px;
+}
+@media only screen and (min-width: $size__nav-switch) {
+    .site-content {
+        margin-top: 60px;
+    }
 }

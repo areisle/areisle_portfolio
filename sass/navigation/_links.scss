@@ -17,3 +17,16 @@ a {
 		outline: 0;
 	}
 }
+
+.btn-link {
+    a {
+        display: block;
+        @include full-size();
+        max-width: 250px;
+        padding: 10px;
+        border: 3px double $mustard;
+    }
+}
+.overview a {
+    max-width: 100px;
+}

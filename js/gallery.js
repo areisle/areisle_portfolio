@@ -7,7 +7,8 @@ jQuery(document).ready(function ($) {
         $inner_nav = $('.inner-nav li'),
         hammertime = new Hammer($('.gallery')[0]),
         $btn_next = $('.btn-next'),
-        $btn_previous = $('.btn-previous');
+        $btn_previous = $('.btn-previous'),
+        $caption_list = $('figcaption .inner');
     
     function swap_image(current, next, $list, dir, z_base) {
         if (current !== next) {
@@ -28,6 +29,15 @@ jQuery(document).ready(function ($) {
         }
         return next;
     }
+    function swap_text(current, next, $list) {
+        if (current !== next) {
+            $list.css({'z-index': 0});
+            $($list[next]).css('z-index', 10);
+            $($list[current]).animate({'opacity': 0}, 300);
+            $($list[next]).animate({'opacity': 1}, 300);
+        }
+    }
+    
     hammertime.on('swipeleft', function () {
         $btn_next.click();
     });
@@ -39,14 +49,15 @@ jQuery(document).ready(function ($) {
         //next image is after in html list
         var next_img = (current_img + 1) % $img_list.length;
         swap_image(current_img, next_img, $mobile_img_list, 'left', 50);
+        swap_text(current_img, next_img, $caption_list);
         current_img = swap_image(current_img, next_img, $img_list, 'left', 0);
-        
     });
     
     $btn_previous.on('click', function () {
         //next image is before in html list
         var next_img = (current_img - 1 + $img_list.length) % $img_list.length;
         swap_image(current_img, next_img, $mobile_img_list, 'right', 50);
+        swap_text(current_img, next_img, $caption_list);
         current_img = swap_image(current_img, next_img, $img_list, 'right', 0);
     });
     
@@ -55,6 +66,7 @@ jQuery(document).ready(function ($) {
         //$inner_nav.removeClass('active');
         jQuery(this).addClass('active');
         var next_img = $(this).index('.inner-nav li');
+        swap_text(current_img, next_img, $caption_list);
         if (next_img > current_img) {
             swap_image(current_img, next_img, $mobile_img_list, 'left', 50);
             current_img = swap_image(current_img, next_img, $img_list, 'left', 0);

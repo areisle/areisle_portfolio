@@ -3,40 +3,60 @@
     //background: red;
     @include testing();
 	ul {
-		list-style: none;
-        margin: 0;
-        padding: 0;
+		@include clean-list();
         @include flex(row, flex-end, center, nowrap);
-        background-color: rgba(white, 0.6);
+        height: 60px;
+        background-color: rgba(white, 1);
+        @media only screen and (min-width: $size__nav-switch) {
+            background-color: rgba(white, 0.6);
+        }
+        
 	}
 
 	li {
         width: calc(100% / 3);
-        max-width: 150px;
+        max-width: 200px;
         min-width: 100px;
-        min-height: 60px;
+        height: 100%;
         @include testing(orange);
 		&:hover > a,
 		&.focus > a {
 		}
 	}
-
 	a {
 		//display: block;
 		text-decoration: none;
-        font-family: futura-pt-condensed, sans-serif;
+        font-family: $futura-regular;
         font-style: normal;
         font-weight: 400;
-        font-size: 2rem;
-        @include full-size();
+        font-size: 1.2rem;
         @include centre();
+        @include full-size();
+        border-top: 3px solid white;
+        border-bottom: 3px solid white;
+        transition: 0.3s;
+        &:hover, &:focus {
+            border-top: 3px solid $mustard;
+            @media only screen and (min-width: $size__nav-switch) {
+                border-bottom: 3px solid $mustard;
+                border-top: 3px solid white;
+            }
+        }
+        @media only screen and (min-width: $size__1-2-column-switch) {
+            font-size: 1.5rem;
+        }
 	}
     
 	.current_page_item > a,
 	.current-menu-item > a,
 	.current_page_ancestor > a,
 	.current-menu-ancestor > a {
-        border-bottom: 3px solid $mustard;
+        border-top: 3px solid $mustard;
+        border-bottom: 3px solid white;
+        @media only screen and (min-width: $size__nav-switch) {
+            border-bottom: 3px solid $mustard;
+            border-top: 3px solid white;
+        }
 	}
 }
 
@@ -63,4 +83,67 @@
 		text-align: right;
 		width: 50%;
 	}
+}
+.post-navigation {
+    ul {
+        @include flex(row, space-between, stretch, wrap);
+    }
+    li {
+        margin: 20px;
+        height: 100%;
+    }
+    a {
+        padding: 10px;
+    }
+}
+$li_height: 100px;
+.inner-post-navigation {
+    display: none;
+    
+    .active {
+        color: $mustard;
+    }
+    ul {
+        z-index: 1;
+    }
+    a {
+        transition: 0.3s;
+        text-decoration: none;
+        font-size: 1rem;
+        &:hover, &:focus{
+            color: $mustard;
+        }
+    }
+    @media only screen and (min-width: $size__nav-switch) {
+        @include centre();
+        position: fixed;
+        height: calc(100vh - 60px);
+        width: 200px;
+        ul {
+            width: 100%;
+        }
+        li {
+            height: $li_height;
+            width: 100%;
+        }
+        a {
+            @include full-size();
+            @include centre();
+        }
+    }
+    //get rid of navigation if too short
+    @media only screen and (max-height: #{$li_height * 5}) {
+        display: none;
+    }
+}
+.floating-box {
+    width:80px;
+    height: 80px;
+    position: fixed;
+    background-color: $darkgrey;
+    border: 8px solid $off-white;
+    z-index: 0;
+    transition: 0.5s;
+    border-radius: 100%;
+    left: calc((200px - 80px) / 2); 
 }

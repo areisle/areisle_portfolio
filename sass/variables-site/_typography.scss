@@ -1,6 +1,9 @@
-$font__main: sans-serif;
+$futura-regular: futura-pt, Futura, Futura-Medium, "Futura Medium", "Century Gothic", CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L", "Avant Garde", sans-serif;
+$futura-condensed: $futura-regular;
+$font__main: $futura-regular;
 $font__code: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 $font__pre: "Courier 10 Pitch", Courier, monospace;
 $font__line-height-body: 1.5;
 $font__line-height-pre: 1.6;
-$futura-regular: futura-pt, sans-serif;
+
+

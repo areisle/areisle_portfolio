@@ -16,12 +16,13 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-
+<!--       <div class="box"></div>-->
+        <nav class="main-portfolio-nav">
         <?php //conditions
         $args = array( 
             'post_type' => array('work'),
             'posts_per_page' => -1,
-            'orderby' => 'title',
+            'orderby' => 'excerpt',
             'order' => 'ASC'
          );
         //variable, can name it as you wish
@@ -51,7 +52,7 @@ get_header(); ?>
             </ul>
             <?php
         } ?>
-
+        </nav>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
